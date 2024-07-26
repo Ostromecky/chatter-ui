@@ -1,26 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Container, createTheme, CssBaseline, ThemeProvider } from "@mui/material";
+import { RouterProvider } from "react-router-dom";
+import router from "./routes";
+import { ApolloProvider } from "@apollo/client";
+import client from "./constants/apollo-client";
+import Guard from './components/auth/Guard';
+import Header from './components/header/Header';
+import Snackbar from './components/snackbar/Snackbar';
+
+const darkTheme = createTheme({
+    palette: {
+        mode: 'dark'
+    }
+});
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <ApolloProvider client={client}>
+            <ThemeProvider theme={darkTheme}>
+                <CssBaseline/>
+                <Header/>
+                <Container>
+                    <Guard>
+                        <RouterProvider router={router}/>
+                    </Guard>
+                </Container>
+                <Snackbar/>
+            </ThemeProvider>
+        </ApolloProvider>
+    )
 }
 
 export default App;
