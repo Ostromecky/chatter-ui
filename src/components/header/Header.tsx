@@ -29,7 +29,7 @@ const Header = () => {
     const authenticated = useReactiveVar(authenticatedVar);
     const allPages = authenticated ? pages : unauthenticatedPages;
     return (
-        <AppBar>
+        <AppBar position="sticky">
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
                     <Branding/>

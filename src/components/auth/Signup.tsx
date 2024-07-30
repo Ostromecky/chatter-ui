@@ -22,8 +22,8 @@ const Signup = () => {
                     }
                 }
             })
-            await login({email, password});
             setError('');
+            await login({email, password});
         } catch (err) {
             const errorMessage = extractErrorMessage(err);
             if (errorMessage) {
